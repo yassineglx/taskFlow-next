@@ -1,33 +1,8 @@
 import AddProjectForm from './AddProjectForm';
-
-// Server Actions
-async function deleteProject(formData: FormData) {
-  'use server';
-
-  const id = formData.get('id');
-
-  await fetch(`http://127.0.0.1:4000/projects/${id}`, {
-    method: 'DELETE',
-  });
-}
-
-async function renameProject(formData: FormData) {
-  'use server';
-
-  const id = formData.get('id');
-  const name = formData.get('name');
-
-  await fetch(`http://127.0.0.1:4000/projects/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ name }),
-  });
-}
+import { renameProject, deleteProject } from '../actions/projects';
 
 export default async function DashboardPage() {
-  const res = await fetch('http://127.0.0.1:4000/projects', {
+  const res = await fetch('http://127.0.0.1:3000/api/projects', {
     cache: 'no-store',
   });
 

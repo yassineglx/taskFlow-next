@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-const API_URL = 'http://127.0.0.1:4000/projects';
+const API_URL = 'http://127.0.0.1:3000/api/projects';
 
 /**
  * CREATE PROJECT
@@ -24,12 +24,10 @@ export async function addProject(formData: FormData) {
 
 /**
  * RENAME PROJECT
- * - receives id + newName
- * - must send full object (name + color)
  */
 export async function renameProject(formData: FormData) {
   const id = formData.get('id') as string;
-  const newName = formData.get('newName') as string;
+  const newName = (formData.get('newName') || formData.get('name')) as string;
   const color = formData.get('color') as string;
 
   await fetch(`${API_URL}/${id}`, {
@@ -39,7 +37,7 @@ export async function renameProject(formData: FormData) {
     },
     body: JSON.stringify({
       name: newName,
-      color,
+      color: color || undefined,
     }),
   });
 

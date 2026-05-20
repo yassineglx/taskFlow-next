@@ -5,7 +5,7 @@ interface Props {
 }
 export default async function ProjectPage({ params }: Props) {
   const { id } = await params;
-  const res = await fetch(`http://127.0.0.1:4000/projects/${id}`, {
+  const res = await fetch(`http://127.0.0.1:3000/api/projects/${id}`, {
     cache: 'no-store'
   });
   if (!res.ok) {
