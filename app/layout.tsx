@@ -1,8 +1,11 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import LogoutButton from './components/LogoutButton';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'TaskFlow',
@@ -20,7 +23,7 @@ export default async function RootLayout({
 
   return (
     <html lang="fr">
-      <body>
+      <body className={inter.className}>
         <header style={{
           background: '#1B8C3E', color: 'white',
           padding: '1rem 2rem', display: 'flex',
