@@ -1,20 +1,29 @@
 'use client';
 
 import { useActionState } from 'react';
-import { login } from '../actions/auth';
+import { signup } from '../actions/auth';
 
-export default function LoginPage() {
-  const [state, formAction, pending] = useActionState(login, null);
+export default function SignupPage() {
+  const [state, formAction, pending] = useActionState(signup, null);
 
   return (
     <div className="auth-container">
       <div className="auth-card">
         <h1 className="auth-title">TaskFlow</h1>
-        <p className="auth-subtitle">Connectez-vous pour accéder à vos projets</p>
+        <p className="auth-subtitle">Créez votre compte collaboratif</p>
 
         {state?.error && <div className="alert alert-danger">{state.error}</div>}
 
         <form action={formAction} className="auth-form">
+          <div className="form-group">
+            <input
+              name="name"
+              type="text"
+              placeholder="Nom complet"
+              required
+              className="form-control"
+            />
+          </div>
           <div className="form-group">
             <input
               name="email"
@@ -33,13 +42,22 @@ export default function LoginPage() {
               className="form-control"
             />
           </div>
+          <div className="form-group">
+            <input
+              name="confirmPassword"
+              type="password"
+              placeholder="Confirmer le mot de passe"
+              required
+              className="form-control"
+            />
+          </div>
           <button type="submit" disabled={pending} className="btn-primary">
-            {pending ? 'Connexion...' : 'Se connecter'}
+            {pending ? 'Inscription...' : "S'inscrire"}
           </button>
         </form>
 
         <p className="auth-footer">
-          Nouveau sur TaskFlow ? <a href="/signup" className="auth-link">Créer un compte</a>
+          Déjà un compte ? <a href="/login" className="auth-link">Se connecter</a>
         </p>
       </div>
     </div>

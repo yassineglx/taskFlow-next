@@ -24,16 +24,17 @@ export default async function RootLayout({
   return (
     <html lang="fr">
       <body className={inter.className}>
-        <header style={{
-          background: '#1B8C3E', color: 'white',
-          padding: '1rem 2rem', display: 'flex',
-          justifyContent: 'space-between', alignItems: 'center'
-        }}>
-          <h2 style={{ margin: 0, fontWeight: 700 }}>TaskFlow</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            {user && <span>{user.name}</span>}
-            {user && <LogoutButton />}
-            {!user && <a href="/login" style={{ color: 'white' }}>Login</a>}
+        <header className="app-header">
+          <a href="/" className="logo-text">TaskFlow</a>
+          <div className="header-user-zone">
+            {user ? (
+              <>
+                <span className="header-username">{user.name}</span>
+                <LogoutButton />
+              </>
+            ) : (
+              <a href="/login" className="btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Connexion</a>
+            )}
           </div>
         </header>
         <main>{children}</main>
